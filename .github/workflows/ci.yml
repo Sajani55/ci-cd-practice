@@ -1,0 +1,28 @@
+
+name: My First CI Workflow
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get project code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Check Python files
+        run: python -m compileall .
+
+      - name: Run automated tests
+        run: pytest -v
